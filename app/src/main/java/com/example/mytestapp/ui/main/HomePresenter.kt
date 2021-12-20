@@ -17,6 +17,7 @@ class HomePresenter {
     fun checkData() {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
+
                 when (val response = repository.getData()) {
                     200 -> {
                         withContext(Dispatchers.Main) {

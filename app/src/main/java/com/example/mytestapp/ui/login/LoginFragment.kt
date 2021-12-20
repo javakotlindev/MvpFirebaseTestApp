@@ -37,6 +37,7 @@ class LoginFragment : Fragment(), LoginView {
         binding.apply {
             registrationBtn.setOnClickListener {
                 presenter.loginUser(emailEt.text.toString(), passwordEt.text.toString())
+                registrationBtn.isEnabled = false
             }
             accountTxt.setOnClickListener {
                 navController.navigate(R.id.action_loginFragment_to_registrationFragment)
@@ -46,14 +47,17 @@ class LoginFragment : Fragment(), LoginView {
 
     override fun showError() {
         Toast.makeText(requireContext(), "Error in firebase", Toast.LENGTH_SHORT).show()
+        binding.registrationBtn.isEnabled = true
     }
 
     override fun showEmptyField() {
         Toast.makeText(requireContext(), "Please fill the blanks", Toast.LENGTH_SHORT).show()
+        binding.registrationBtn.isEnabled = true
     }
 
     override fun showSuccess() {
         navController.navigate(R.id.action_loginFragment_to_homeFragment)
+        binding.registrationBtn.isEnabled = true
     }
 
 }

@@ -47,6 +47,7 @@ class RegistrationFragment : Fragment(), RegistrationView {
                     passwordEt.text.toString(),
                     confirmPasswordEt.text.toString()
                 )
+                registrationBtn.isEnabled = false
             }
             accountTxt.setOnClickListener {
                 navController.navigate(R.id.action_registrationFragment_to_loginFragment)
@@ -56,14 +57,17 @@ class RegistrationFragment : Fragment(), RegistrationView {
 
     override fun showError() {
         Toast.makeText(requireContext(), "Error in firebase", Toast.LENGTH_SHORT).show()
+        binding.registrationBtn.isEnabled = true
     }
 
     override fun showEmptyField() {
         Toast.makeText(requireContext(), "Please fill the blanks", Toast.LENGTH_SHORT).show()
+        binding.registrationBtn.isEnabled = true
     }
 
     override fun showSuccess() {
         navController.navigate(R.id.action_registrationFragment_to_homeFragment)
+        binding.registrationBtn.isEnabled = true
     }
 
     override fun showNoMatch() {
@@ -72,5 +76,6 @@ class RegistrationFragment : Fragment(), RegistrationView {
             "Your confirm password not equals password",
             Toast.LENGTH_SHORT
         ).show()
+        binding.registrationBtn.isEnabled = true
     }
 }
